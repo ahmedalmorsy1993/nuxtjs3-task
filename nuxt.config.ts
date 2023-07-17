@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" }
   },
-  css: ["~/assets/scss/main.scss"],
+  css: ["~/assets/scss/main.scss", "~/assets/fonts/stylesheet.css"],
   vite: {
     css: {
       preprocessorOptions: {
