@@ -6,21 +6,9 @@ const { state, actions } = useStore<string>();
 
 <template>
   <aside class="sidebar">
-    Component: Sidebar
-    <input v-model="state.name" type="text" />
-    <button
-      @click="
-        () => {
-          state.emails.push(state.name);
-          state.name = '';
-        }
-      "
-    >
-      add
-    </button>
-    <p>
-      {{ state.name }}
-    </p>
+    <div class="sidebar__logo">
+      <img width="40" height="20" src="~/assets/images/logo.svg" alt="logo" />
+    </div>
   </aside>
 </template>
 

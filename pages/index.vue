@@ -8,6 +8,7 @@ const { state } = useStore<string>();
     <ul>
       <li v-for="(email, index) in state.emails" :key="index">
         {{ email }}
+        <button @click="() => state.emails.splice(index, 1)">remove</button>
       </li>
     </ul>
   </div>
