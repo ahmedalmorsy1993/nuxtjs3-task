@@ -1,15 +1,25 @@
 <script lang="ts" setup>
 import { useStore } from "../composables/store";
 
-const props = useStore();
+const { state, actions } = useStore<string>();
 </script>
 
 <template>
   <aside class="sidebar">
     Component: Sidebar
-    <input v-model="props.name" type="text" />
+    <input v-model="state.name" type="text" />
+    <button
+      @click="
+        () => {
+          state.emails.push(state.name);
+          state.name = '';
+        }
+      "
+    >
+      add
+    </button>
     <p>
-      {{ props.name }}
+      {{ state.name }}
     </p>
   </aside>
 </template>

@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-const props = useStore();
+const { state } = useStore<string>();
 </script>
 
 <template>
   <div>
     Page: foo
-    {{ props.name }}
-    {{ props.age }}
+    <ul>
+      <li v-for="(email, index) in state.emails" :key="index">
+        {{ email }}
+      </li>
+    </ul>
   </div>
 </template>
 
