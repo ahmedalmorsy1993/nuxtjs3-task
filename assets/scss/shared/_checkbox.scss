@@ -1,0 +1,28 @@
+label {
+  color: getColor(primary);
+  cursor: pointer;
+  span {
+    @include flexRow;
+    gap: 12px;
+    &::before {
+      content: "";
+      @include flexRow {
+        justify-content: center;
+      }
+
+      width: 20px;
+      height: 20px;
+      border: 1px solid getColor(checkbox-border-color);
+      border-radius: 5px;
+      background-color: getColor(white);
+    }
+  }
+  input[type="checkbox"] {
+    display: none;
+    &:checked + span::before {
+      content: "\2713";
+      color: getColor(white);
+      background-color: getColor(third);
+    }
+  }
+}

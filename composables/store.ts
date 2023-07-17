@@ -1,17 +1,62 @@
-export const useStore = <T extends unknown>() => {
-  const state = useState<{ name: string; age: number; emails: Array<T | any> }>(
-    "store",
-    () => ({
-      name: "ahmed",
-      age: 30,
-      emails: []
-    })
-  );
-  const actions = {
-    setEmails: (item: T) => {
-      state.value.emails = [...state.value.emails, item];
-    }
-  };
+interface EmailType {
+  title: string;
+  description?: string;
+  checked: boolean;
+  selected: boolean;
+  markRead: boolean;
+  archived: boolean;
+}
 
-  return { state, actions };
+const initialData: EmailType[] = [
+  {
+    title: "Wave hello with video, reactions and more now in huddles",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  },
+  {
+    title: "Wave hello with video, reactions and more now in huddles",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  },
+  {
+    title:
+      "[JIRA] (LXQ-2604) Learning path- file - Existing File -two buttons for viewing the file",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  },
+  {
+    title:
+      "[JIRA] (LXQ-2604) Learning path- file - Existing File -two buttons for viewing the file",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  },
+  {
+    title:
+      "[JIRA] (LXQ-2604) Learning path- file - Existing File -two buttons for viewing the file",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  },
+  {
+    title:
+      "[JIRA] (LXQ-2604) Learning path- file - Existing File -two buttons for viewing the file",
+    checked: false,
+    selected: false,
+    markRead: false,
+    archived: false
+  }
+];
+export const useStore = () => {
+  return useState("store", () => ({
+    emails: [...initialData]
+  }));
 };
