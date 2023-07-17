@@ -18,3 +18,14 @@
 @function getColor($color) {
   @return map-get($map: $colors, $key: $color);
 }
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+  @content;
+}
+@mixin flexRow {
+  display: flex;
+  align-items: center;
+  @content;
+}
