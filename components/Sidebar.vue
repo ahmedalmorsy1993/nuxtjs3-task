@@ -9,8 +9,6 @@ const items: ItemType[] = [
   { title: "inbox", icon: "inbox.svg", to: "/" },
   { title: "archive", icon: "archive.svg", to: "/archive" }
 ];
-
-const { state, actions } = useStore<string>();
 </script>
 
 <template>
@@ -20,11 +18,6 @@ const { state, actions } = useStore<string>();
     </div>
     <nav class="sidebar__nav">
       <div class="sidebar__nav__list">
-        <!-- <div
-          v-for="(item, index) in items"
-          :key="index"
-          class="sidebar__nav__list__item"
-        > -->
         <NuxtLink
           class="sidebar__nav__list__item"
           v-for="(item, index) in items"
@@ -43,8 +36,10 @@ const { state, actions } = useStore<string>();
           <div class="sidebar__nav__list__item--right">20</div>
         </NuxtLink>
       </div>
-      <!-- </div> -->
-      <div class="sidebar__nav__action">actions</div>
+      <a href="#" class="sidebar__nav__logout">
+        <img src="~/assets/images/logout.svg" alt="logout" />
+        <span>Logout</span>
+      </a>
     </nav>
   </aside>
 </template>

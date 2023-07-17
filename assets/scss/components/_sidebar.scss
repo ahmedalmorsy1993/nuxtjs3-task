@@ -45,5 +45,18 @@
                 }
             }
         }
+        &__logout {
+            padding-inline: 24px;
+            padding-block: 12px;
+            gap: 12px;
+            color: getColor(secondary);
+            // box-shadow: 4px 0 25% #000000;
+            @include flexRow;
+            span {
+                text-shadow: 0 3px 4px #000000;
+                -webkit-filter: blur(4%);
+                filter: blur(4%);
+            }
+        }
     }
 }
