@@ -3,7 +3,7 @@
 <template>
   <main class="main-layout">
     <Sidebar />
-    <div class="container">
+    <div class="main-layout__container">
       <slot />
     </div>
   </main>

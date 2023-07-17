@@ -3,4 +3,7 @@
     display: grid;
     grid-template-columns: 260px auto;
     background-color: getColor(white);
+    &__container {
+        border-left: 1px solid getColor(border-color);
+    }
 }
