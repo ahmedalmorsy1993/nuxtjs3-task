@@ -1,39 +1,14 @@
 <script lang="ts" setup>
+import { useStore } from "~/store";
 const store = useStore();
-const selectedCount = computed<number>(
-  () => store.value.emails.filter((item) => item.checked).length
-);
-const selectedAll = computed<boolean>(() =>
-  store.value.emails.every((item) => item.checked)
-);
-const allMarked = computed<boolean>(() =>
-  store.value.emails.every((item) => item.markRead)
-);
-const onSelectAll = () => {
-  store.value.emails = store.value.emails.map((item) => ({
-    ...item,
-    checked: !selectedAll.value ? true : false
-  }));
-};
-const handleArchive = () => {
-  store.value.emails = store.value.emails.map((item) => ({
-    ...item,
-    archived: true
-  }));
-};
-const handleMarkRead = () => {
-  store.value.emails = store.value.emails.map((item) => ({
-    ...item,
-    markRead: !item.markRead
-  }));
-};
+
 onMounted(() => {
   document.addEventListener("keypress", (e) => {
     if (e.code == "KeyA") {
-      handleArchive();
+      store.onArchive();
     }
     if (e.code == "KeyR") {
-      handleMarkRead();
+      store.onMarkAsRead();
     }
   });
 });
@@ -45,13 +20,9 @@ onMounted(() => {
       <h2>inbox</h2>
     </header>
     <section class="inbox-page__top-nav">
-      <CheckBox
-        :class="allMarked && 'mark-as-read'"
-        :disabled="allMarked"
-        @onChange="onSelectAll()"
-        :checked="selectedAll"
-      >
-        Email Selected ({{ selectedCount }})
+      <!-- :class="allMarked && 'mark-as-read'" -->
+      <CheckBox @onChange="store.onSelectAll()" :checked="store.isSelectedAll">
+        Email Selected ({{ store.selectedEmailsCount }})
       </CheckBox>
       <ul>
         <li>
@@ -76,18 +47,16 @@ onMounted(() => {
     </section>
     <ul class="inbox-page__list">
       <li
-        v-for="(item, index) in store.emails"
+        v-for="(item, index) in store.unArchivedEmails"
         :key="index"
         class="inbox-page__list__item"
         :class="item.markRead && 'mark-as-read'"
       >
         <CheckBox
           :checked="item.checked"
-          :disabled="item.markRead"
           @onChange="item.checked = !item.checked"
         >
           {{ item.title }}
-          {{ item.archived }}
           {{ item.markRead }}
         </CheckBox>
       </li>

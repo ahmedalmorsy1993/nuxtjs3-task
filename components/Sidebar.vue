@@ -1,21 +1,25 @@
 <script lang="ts" setup>
-import { useStore } from "../composables/store";
+import { useStore } from "~/store";
 const store = useStore();
-const inboxCount = store.value.emails.filter((item) => !item.archived).length;
-const archivedCount = store.value.emails.filter((item) => item.archived).length;
+
 interface ItemType {
   title: string;
   to: string;
   icon: string;
-  value: number;
+  value: any;
 }
 const items: ItemType[] = [
-  { title: "inbox", icon: "inbox.svg", to: "/", value: inboxCount },
+  {
+    title: "inbox",
+    icon: "inbox.svg",
+    to: "/",
+    value: toRefs(store).inboxCount
+  },
   {
     title: "archive",
     icon: "archive.svg",
     to: "/archive",
-    value: archivedCount
+    value: toRefs(store).archivedEmailsCount
   }
 ];
 </script>
@@ -42,7 +46,9 @@ const items: ItemType[] = [
             />
             <span>{{ item.title }}</span>
           </div>
-          <div class="sidebar__nav__list__item--right">{{ item.value }}</div>
+          <div class="sidebar__nav__list__item--right">
+            {{ item.value }}
+          </div>
         </NuxtLink>
       </div>
       <a href="#" class="sidebar__nav__logout">
