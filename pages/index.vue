@@ -59,6 +59,7 @@ onUnmounted(() => {
               :key="index"
               class="inbox-page__list__item"
               :class="item.markRead && 'mark-as-read'"
+              @click="store.onShowSingleEmail(item)"
             >
               <CheckBox
                 :checked="item.checked"

@@ -4,7 +4,9 @@ import { defineStore } from "pinia";
 export const useStore = defineStore({
   id: "store",
   state: () => ({
+    dialog: false,
     emails: [...initialData],
+    singleEmail: {} as EmailType,
     archivedEmails: [] as EmailType[]
   }),
   actions: {
@@ -54,6 +56,11 @@ export const useStore = defineStore({
       }
 
       this.archivedEmails = this.emails.filter((item) => item.archived);
+    },
+    onShowSingleEmail(emailItem: EmailType) {
+      this.dialog = true;
+      this.singleEmail = emailItem;
+      console.log(this.dialog);
     }
   },
   getters: {
