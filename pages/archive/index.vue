@@ -66,7 +66,9 @@ onUnmounted(() => {
                 :checked="item.checked"
                 @onChange="item.checked = !item.checked"
               >
-                {{ item.title }}
+                <span @click.stop="store.onShowSingleEmail(item)">
+                  {{ item.title }}
+                </span>
               </CheckBox>
             </li>
           </transition-group>

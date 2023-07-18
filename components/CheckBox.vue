@@ -1,10 +1,15 @@
 <template>
   <div class="checkbox-container">
-    <div class="checkbox-container__wrapper">
-      <input @change="$emit('onChange')" type="checkbox" v-bind="attrs" />
+    <div @click.stop class="checkbox-container__wrapper">
+      <input
+        @click.stop
+        @change="$emit('onChange')"
+        type="checkbox"
+        v-bind="attrs"
+      />
       <span></span>
     </div>
-    <label @click="$emit('onClick')">
+    <label>
       <slot />
     </label>
   </div>

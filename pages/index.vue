@@ -59,13 +59,14 @@ onUnmounted(() => {
               :key="index"
               class="inbox-page__list__item"
               :class="item.markRead && 'mark-as-read'"
-              @click="store.onShowSingleEmail(item)"
             >
               <CheckBox
                 :checked="item.checked"
                 @onChange="item.checked = !item.checked"
               >
-                {{ item.title }}
+                <span @click.stop="store.onShowSingleEmail(item)">
+                  {{ item.title }}
+                </span>
               </CheckBox>
             </li>
           </transition-group>
