@@ -44,22 +44,25 @@ onMounted(() => {
         </li>
       </ul>
     </section>
-    <ul class="inbox-page__list">
-      <li
-        v-for="(item, index) in store.unArchivedEmails"
-        :key="index"
-        class="inbox-page__list__item"
-        :class="item.markRead && 'mark-as-read'"
-      >
-        <CheckBox
-          :checked="item.checked"
-          @onChange="item.checked = !item.checked"
+    <template v-if="store.unArchivedEmails.length">
+      <ul class="inbox-page__list">
+        <li
+          v-for="(item, index) in store.unArchivedEmails"
+          :key="index"
+          class="inbox-page__list__item"
+          :class="item.markRead && 'mark-as-read'"
         >
-          {{ item.title }}
-          {{ item.markRead }}
-        </CheckBox>
-      </li>
-    </ul>
+          <CheckBox
+            :checked="item.checked"
+            @onChange="item.checked = !item.checked"
+          >
+            {{ item.title }}
+            {{ item.markRead }}
+          </CheckBox>
+        </li>
+      </ul>
+    </template>
+    <div v-else class="no-data">No Inbox Emails</div>
   </div>
 </template>
 

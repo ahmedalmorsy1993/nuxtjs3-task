@@ -4,7 +4,8 @@ import { defineStore } from "pinia";
 export const useStore = defineStore({
   id: "store",
   state: () => ({
-    emails: [...initialData]
+    emails: [...initialData],
+    archivedEmails: [] as EmailType[]
   }),
   actions: {
     onArchive() {
@@ -12,6 +13,13 @@ export const useStore = defineStore({
         ...item,
         archived: item.checked ? true : false
       }));
+      this.archivedEmails = [...this.emails]
+        .filter((item) => item.archived)
+        .map((item) => ({
+          ...item,
+          markRead: false,
+          checked: false
+        }));
     },
     onSelectAll() {
       this.emails = this.emails.map((item) => ({
@@ -19,8 +27,20 @@ export const useStore = defineStore({
         checked: !this.isSelectedAll ? true : false
       }));
     },
+    onSelectAllArchived() {
+      this.archivedEmails = this.archivedEmails.map((item) => ({
+        ...item,
+        checked: !this.isSelectedAllArchived ? true : false
+      }));
+    },
     onMarkAsRead() {
       this.emails = this.unArchivedEmails.map((item) => ({
+        ...item,
+        markRead: item.checked ? true : false
+      }));
+    },
+    onArchivedMarkAsRead() {
+      this.archivedEmails = this.archivedEmails.map((item) => ({
         ...item,
         markRead: item.checked ? true : false
       }));
@@ -30,22 +50,36 @@ export const useStore = defineStore({
     unArchivedEmails(state): EmailType[] {
       return state.emails.filter((item) => !item.archived);
     },
-    archivedEmails(state): EmailType[] {
-      return state.emails
-        .filter((item) => item.archived)
-        .map((item) => ({
-          ...item,
-          markRead: false,
-          checked: false
-        }));
-    },
+    // archivedEmails(state): EmailType[] {
+    //   return state.emails
+    //     .filter((item) => item.archived)
+    //     .map((item) => ({
+    //       ...item,
+    //       markRead: false,
+    //       checked: false
+    //     }));
+    // },
     isSelectedAll(): boolean {
-      return this.unArchivedEmails.every((item) => item.checked);
+      if (this.inboxCount) {
+        return this.unArchivedEmails.every((item) => item.checked);
+      } else {
+        return false;
+      }
     },
-    selectedEmailsCount(state): number {
+    isSelectedAllArchived(): boolean {
+      if (this.archivedEmailsCount) {
+        return this.archivedEmails.every((item) => item.checked);
+      } else {
+        return false;
+      }
+    },
+    selectedEmailsCount(): number {
       return this.unArchivedEmails.filter((item) => item.checked).length;
     },
-    archivedEmailsCount(state): number {
+    selectedArchivedEmailsCount(): number {
+      return this.archivedEmails.filter((item) => item.checked).length;
+    },
+    archivedEmailsCount(): number {
       return this.archivedEmails.length;
     },
     inboxCount(): number {
