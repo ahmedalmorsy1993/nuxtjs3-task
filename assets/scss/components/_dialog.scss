@@ -1,9 +1,11 @@
 .dialog {
+    @include flexRow {
+        justify-content: flex-end;
+    }
     position: fixed;
-    direction: rtl;
     z-index: 999;
     min-height: 100vh;
-    width: 0;
+    width: 100%;
     background-color: rgba($color: getColor(dialog-color), $alpha: 0.84);
     right: 0;
     bottom: 0;
@@ -15,6 +17,27 @@
         width: 752px;
         background-color: getColor(white);
         height: 100vh;
+        &__content {
+            padding: 32px;
+            &__top-nav {
+                padding-inline: 0px !important;
+                padding-bottom: 32px !important;
+                div {
+                    @include flexRow;
+                    gap: 12px;
+                    color: getColor(secondary);
+                }
+            }
+            h2 {
+                font-size: 20px;
+                color: getColor(primary);
+            }
+            p {
+                padding-top: 20px;
+                font-size: 14px;
+                color: getColor(secondary);
+            }
+        }
     }
     &__show {
         transform: translateX(0);
@@ -22,10 +45,4 @@
         opacity: 1;
         visibility: visible;
     }
-}
-.show {
-    transform: translateX(0);
-    width: 100%;
-    opacity: 1;
-    visibility: visible;
 }

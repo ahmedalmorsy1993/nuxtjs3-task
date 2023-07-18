@@ -60,7 +60,6 @@ export const useStore = defineStore({
     onShowSingleEmail(emailItem: EmailType) {
       this.dialog = true;
       this.singleEmail = emailItem;
-      console.log(this.dialog);
     }
   },
   getters: {
