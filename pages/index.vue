@@ -2,15 +2,21 @@
 import { useStore } from "~/store";
 const store = useStore();
 
+const handleKeypress = (e: KeyboardEvent) => {
+  if (e.code == "KeyA") {
+    store.onArchive();
+  }
+  if (e.code == "KeyR") {
+    store.onMarkAsRead();
+  }
+};
+
 onMounted(() => {
-  document.addEventListener("keypress", (e) => {
-    if (e.code == "KeyA") {
-      store.onArchive();
-    }
-    if (e.code == "KeyR") {
-      store.onMarkAsRead();
-    }
-  });
+  document.addEventListener("keypress", handleKeypress);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keypress", handleKeypress);
 });
 </script>
 

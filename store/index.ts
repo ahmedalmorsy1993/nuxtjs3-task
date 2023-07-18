@@ -9,10 +9,13 @@ export const useStore = defineStore({
   }),
   actions: {
     onArchive() {
-      this.emails = this.emails.map((item) => ({
-        ...item,
-        archived: item.checked ? true : false
-      }));
+      if (this.inboxCount) {
+        this.emails = this.emails.map((item) => ({
+          ...item,
+          archived: item.checked ? true : false
+        }));
+      }
+
       this.archivedEmails = [...this.emails]
         .filter((item) => item.archived)
         .map((item) => ({
@@ -50,15 +53,7 @@ export const useStore = defineStore({
     unArchivedEmails(state): EmailType[] {
       return state.emails.filter((item) => !item.archived);
     },
-    // archivedEmails(state): EmailType[] {
-    //   return state.emails
-    //     .filter((item) => item.archived)
-    //     .map((item) => ({
-    //       ...item,
-    //       markRead: false,
-    //       checked: false
-    //     }));
-    // },
+
     isSelectedAll(): boolean {
       if (this.inboxCount) {
         return this.unArchivedEmails.every((item) => item.checked);

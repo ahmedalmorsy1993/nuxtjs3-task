@@ -1,16 +1,20 @@
 <script lang="ts" setup>
 import { useStore } from "~/store";
 const store = useStore();
+const handleKeypress = (e: KeyboardEvent) => {
+  if (e.code == "KeyE") {
+  }
+  if (e.code == "KeyR") {
+    store.onArchivedMarkAsRead();
+  }
+};
 
 onMounted(() => {
-  document.addEventListener("keypress", (e) => {
-    // if (e.code == "KeyA") {
-    //   store.onArchive();
-    // }
-    if (e.code == "KeyR") {
-      store.onArchivedMarkAsRead();
-    }
-  });
+  document.addEventListener("keypress", handleKeypress);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keypress", handleKeypress);
 });
 </script>
 
