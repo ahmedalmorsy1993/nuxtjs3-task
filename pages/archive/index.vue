@@ -3,6 +3,7 @@ import { useStore } from "~/store";
 const store = useStore();
 const handleKeypress = (e: KeyboardEvent) => {
   if (e.code == "KeyE") {
+    store.onRestore();
   }
   if (e.code == "KeyR") {
     store.onArchivedMarkAsRead();
@@ -51,24 +52,28 @@ onUnmounted(() => {
         </li>
       </ul>
     </section>
-    <template v-if="store.archivedEmails.length">
-      <ul class="inbox-page__list">
-        <li
-          v-for="(item, index) in store.archivedEmails"
-          :key="index"
-          class="inbox-page__list__item"
-          :class="item.markRead && 'mark-as-read'"
-        >
-          <CheckBox
-            :checked="item.checked"
-            @onChange="item.checked = !item.checked"
-          >
-            {{ item.title }}
-          </CheckBox>
-        </li>
-      </ul>
-    </template>
-    <div v-else class="no-data">No Archived Emails</div>
+    <transition name="fade" mode="out-in">
+      <template v-if="store.archivedEmails.length">
+        <ul class="inbox-page__list">
+          <transition-group name="fade" mode="out-in">
+            <li
+              v-for="(item, index) in store.archivedEmails"
+              :key="index"
+              class="inbox-page__list__item"
+              :class="item.markRead && 'mark-as-read'"
+            >
+              <CheckBox
+                :checked="item.checked"
+                @onChange="item.checked = !item.checked"
+              >
+                {{ item.title }}
+              </CheckBox>
+            </li>
+          </transition-group>
+        </ul>
+      </template>
+      <div v-else class="no-data">No Archived Emails</div>
+    </transition>
   </div>
 </template>
 

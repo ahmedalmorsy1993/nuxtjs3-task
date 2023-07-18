@@ -50,25 +50,28 @@ onUnmounted(() => {
         </li>
       </ul>
     </section>
-    <template v-if="store.unArchivedEmails.length">
-      <ul class="inbox-page__list">
-        <li
-          v-for="(item, index) in store.unArchivedEmails"
-          :key="index"
-          class="inbox-page__list__item"
-          :class="item.markRead && 'mark-as-read'"
-        >
-          <CheckBox
-            :checked="item.checked"
-            @onChange="item.checked = !item.checked"
-          >
-            {{ item.title }}
-            {{ item.markRead }}
-          </CheckBox>
-        </li>
-      </ul>
-    </template>
-    <div v-else class="no-data">No Inbox Emails</div>
+    <transition name="fade" mode="out-in">
+      <template v-if="store.unArchivedEmails.length">
+        <ul class="inbox-page__list">
+          <transition-group name="fade" mode="out-in">
+            <li
+              v-for="(item, index) in store.unArchivedEmails"
+              :key="index"
+              class="inbox-page__list__item"
+              :class="item.markRead && 'mark-as-read'"
+            >
+              <CheckBox
+                :checked="item.checked"
+                @onChange="item.checked = !item.checked"
+              >
+                {{ item.title }}
+              </CheckBox>
+            </li>
+          </transition-group>
+        </ul>
+      </template>
+      <div v-else class="no-data">No Inbox Emails</div>
+    </transition>
   </div>
 </template>
 

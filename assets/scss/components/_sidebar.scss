@@ -56,7 +56,8 @@
             // box-shadow: 4px 0 25% #000000;
             @include flexRow;
             span {
-                text-shadow: 0 4px 5px #000000;
+                text-shadow: 0 4px 5px rgb(0 0 0 / 35%);
+
                 -webkit-filter: blur(4%);
                 filter: blur(4%);
             }

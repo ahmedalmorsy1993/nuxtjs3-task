@@ -41,6 +41,19 @@ export const useStore = defineStore({
         ...item,
         markRead: item.checked ? true : false
       }));
+    },
+    onRestore() {
+      if (this.archivedEmails.length) {
+        this.emails = [
+          ...this.unArchivedEmails,
+          ...this.archivedEmails.map((item) => ({
+            ...item,
+            archived: item.checked ? false : true
+          }))
+        ];
+      }
+
+      this.archivedEmails = this.emails.filter((item) => item.archived);
     }
   },
   getters: {
