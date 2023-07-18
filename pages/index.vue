@@ -17,10 +17,9 @@ onMounted(() => {
 <template>
   <div class="inbox-page">
     <header>
-      <h2>inbox</h2>
+      <h2>Inbox</h2>
     </header>
     <section class="inbox-page__top-nav">
-      <!-- :class="allMarked && 'mark-as-read'" -->
       <CheckBox @onChange="store.onSelectAll()" :checked="store.isSelectedAll">
         Email Selected ({{ store.selectedEmailsCount }})
       </CheckBox>

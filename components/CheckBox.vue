@@ -1,13 +1,13 @@
 <template>
-  <label :for="$attrs.id">
-    <input
-      @change="$emit('onChange')"
-      type="checkbox"
-      :id="$attrs.id"
-      v-bind="attrs"
-    />
-    <span> <slot /></span>
-  </label>
+  <div class="checkbox-container">
+    <div class="checkbox-container__wrapper">
+      <input @change="$emit('onChange')" type="checkbox" v-bind="attrs" />
+      <span></span>
+    </div>
+    <label @click="$emit('onClick')">
+      <slot />
+    </label>
+  </div>
 </template>
 
 <script setup>

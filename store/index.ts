@@ -30,16 +30,23 @@ export const useStore = defineStore({
     unArchivedEmails(state): EmailType[] {
       return state.emails.filter((item) => !item.archived);
     },
-    isSelectedAll(state): boolean {
-      return this.unArchivedEmails.every(
-        (item) => item.checked && !item.archived
-      );
+    archivedEmails(state): EmailType[] {
+      return state.emails
+        .filter((item) => item.archived)
+        .map((item) => ({
+          ...item,
+          markRead: false,
+          checked: false
+        }));
+    },
+    isSelectedAll(): boolean {
+      return this.unArchivedEmails.every((item) => item.checked);
     },
     selectedEmailsCount(state): number {
       return this.unArchivedEmails.filter((item) => item.checked).length;
     },
     archivedEmailsCount(state): number {
-      return state.emails.filter((item) => item.archived).length;
+      return this.archivedEmails.length;
     },
     inboxCount(): number {
       return this.unArchivedEmails.length;
