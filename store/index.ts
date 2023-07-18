@@ -16,13 +16,7 @@ export const useStore = defineStore({
         }));
       }
 
-      this.archivedEmails = [...this.emails]
-        .filter((item) => item.archived)
-        .map((item) => ({
-          ...item,
-          markRead: false,
-          checked: false
-        }));
+      this.archivedEmails = this.emails.filter((item) => item.archived);
     },
     onSelectAll() {
       this.emails = this.emails.map((item) => ({
@@ -37,7 +31,7 @@ export const useStore = defineStore({
       }));
     },
     onMarkAsRead() {
-      this.emails = this.unArchivedEmails.map((item) => ({
+      this.emails = this.emails.map((item) => ({
         ...item,
         markRead: item.checked ? true : false
       }));
