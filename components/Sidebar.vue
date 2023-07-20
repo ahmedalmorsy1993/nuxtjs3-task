@@ -27,7 +27,7 @@ const items: ItemType[] = [
 <template>
   <aside class="sidebar">
     <div class="sidebar__logo">
-      <img width="40" height="20" src="~/assets/images/logo.svg" alt="logo" />
+      <img width="40" height="20" src="~/assets/images/Logo.svg" alt="logo" />
     </div>
     <nav class="sidebar__nav">
       <div class="sidebar__nav__list">
